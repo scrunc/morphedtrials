@@ -1,0 +1,47 @@
+# Refuse to capture a level region bigger than this many blocks (safety net against an accidental
+# server-wide selection).
+capture-warn-volume: 500000
+
+# Wand materials are fixed in code (MTWand), not configurable here — deliberately checked against this
+# server's actual GriefPrevention (GOLDEN_SHOVEL claim tool, STICK investigation tool) and WorldEdit
+# (WOODEN_AXE) tools so they never collide: NETHERITE_SHOVEL (region), DIAMOND_HOE (start), IRON_HOE (end).
+
+morph:
+  # How long the sweep takes when a level morphs in.
+  seconds: 6
+  # How long the background repaint back to level 1's layout takes once a dungeon session ends (finished
+  # or the party disbanded) — no players are teleported into this one, it just settles the shared region
+  # back to its idle appearance for the next party.
+  reset-seconds: 4
+  # "Starting" title + boss bar countdown (3, 2, 1...) shown once the level finishes reshaping, BEFORE its
+  # mobs spawn — a breath to get oriented instead of enemies appearing the instant the last block settles.
+  # 0 = skip it and spawn immediately.
+  spawn-countdown-seconds: 3
+  # Force-place blocks within this many blocks (XZ) of the start pad's centre — full height, not just a
+  # floor — the instant a level begins, so a player teleported in is never standing over a hole or inside
+  # an unbuilt wall while the rest of the level is still animating in around them.
+  safe-landing-radius: 3
+
+  # Engine tunables (per-tick placement budget + structural-support knobs) — same keys as KOTH's arena.*
+  # block, since they both resolve via MorphCore's MorphSettings.
+  max-blocks-per-tick: 12000
+  layer-lead: 1
+  structure:
+    float-max-cells: 8
+    min-height: 3
+  meteor:
+    structure-aware: true
+    band-height: 2
+    max-bands: 20
+    per-band-cells: 40
+    max-per-band: 6
+
+  # Style + FX — see MorphSpec in MorphCore for the full key list (meteor.*, veins.*, spiral.*, rain.*,
+  # life.*, collapse.*, shatter.*, rise.*, theme, beat.*, glitch.*, hazard.*, contested.*, display.*,
+  # cooling.*, fx.*). Any key not set here just uses MorphSpec's own hardcoded default.
+  morph-style: sweep
+  fx:
+    audience-padding: 0
+    boss-bar: true
+    title: "&b&lLEVEL SHIFTING"
+    subtitle: "&7The dungeon reshapes around you"

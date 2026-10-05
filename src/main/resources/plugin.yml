@@ -1,0 +1,19 @@
+name: MorphedTrials
+version: ${version}
+main: dev.servereer.morphedtrials.MorphedTrialsPlugin
+api-version: '1.21'
+author: servereer
+description: Multi-level mob dungeons on a single morphing region, played as a party — /mtrials join queues players with a min-player countdown, GUI-authored levels each spawn mobs at a start pad and light up an end pad on clear, walking in remorphs the region into the next level with a safe-landing teleport.
+softdepend: [MorphCore]
+commands:
+  mtrials:
+    description: MorphedTrials dungeon authoring + control.
+    usage: /mtrials <gui|wand|join|leave|edit|dungeon|reload>
+    aliases: [mt]
+permissions:
+  morphedtrials.admin:
+    description: Author dungeons (GUI, wands, edit mode) and force-start runs.
+    default: op
+  morphedtrials.use:
+    description: Join and play a dungeon.
+    default: true
